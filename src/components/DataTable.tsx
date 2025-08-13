@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import { usePaginationStore } from "../stores/usePaginationStore";
-import type { Product } from "../types/Product";
-import { Header } from "./Header";
-import { Pagination } from "./Pagination";
+import { useEffect } from 'react';
+import { usePaginationStore } from '../stores/usePaginationStore';
+import type { Product } from '../types/Product';
+import { Header } from './Header';
+import { Pagination } from './Pagination';
 
 interface DataTableProps {
   products: Product[];

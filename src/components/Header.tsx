@@ -1,6 +1,6 @@
-import { usePaginationStore } from "../stores/usePaginationStore";
-import type { Product } from "../types/Product";
-import { extractUniqueCategories } from "../utils/tableUtils";
+import { usePaginationStore } from '../stores/usePaginationStore';
+import type { Product } from '../types/Product';
+import { extractUniqueCategories } from '../utils/tableUtils';
 
 interface HeaderProps {
   products: Product[];
