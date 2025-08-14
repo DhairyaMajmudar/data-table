@@ -21,7 +21,15 @@ export default function DataTable({ products }: DataTableProps) {
     <div className="bg-slate-800 rounded-lg overflow-hidden shadow-xl">
       <Header products={products} />
       <div className="overflow-x-auto">
-        <table className="w-full table-auto">
+        <table className="w-full table-fixed">
+          <colgroup>
+            <col className="w-1/4" />
+            <col className="w-1/5" />
+            <col className="w-1/5" />
+            <col className="w-1/5" />
+            <col className="w-1/5" />
+            <col className="w-1/5" />
+          </colgroup>
           <thead className="bg-slate-700 text-left">
             <tr>
               <th className="px-4 py-3 text-white cursor-pointer">
@@ -38,9 +46,24 @@ export default function DataTable({ products }: DataTableProps) {
             {currentItems.length > 0 ? (
               currentItems.map((product) => (
                 <tr key={product.id} className="hover:bg-slate-700/50">
-                  <td className="px-4 py-3 text-white">{product.title}</td>
-                  <td className="px-4 py-3 text-white">{product.brand}</td>
-                  <td className="px-4 py-3 text-white">{product.category}</td>
+                  <td
+                    className="px-4 py-3 text-white truncate"
+                    title={product.title}
+                  >
+                    {product.title}
+                  </td>
+                  <td
+                    className="px-4 py-3 text-white truncate"
+                    title={product.brand}
+                  >
+                    {product.brand}
+                  </td>
+                  <td
+                    className="px-4 py-3 text-white truncate"
+                    title={product.category}
+                  >
+                    {product.category}
+                  </td>
                   <td className="px-4 py-3 text-white">
                     ${product.price.toFixed(2)}
                   </td>
