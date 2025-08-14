@@ -24,6 +24,7 @@
     "test:coverage": "bun test --coverage"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@tailwindcss/vite": "^4.1.11",
     "axios": "^1.11.0",
     "react": "^19.1.1",
