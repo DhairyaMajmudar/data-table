@@ -1,4 +1,4 @@
-import { usePaginationStore } from '../stores/usePaginationStore';
+import { usePaginationStore } from '../store/usePaginationStore';
 import type { Product } from '../types/Product';
 import { extractUniqueCategories } from '../utils/tableUtils';
 

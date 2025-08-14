@@ -1,4 +1,4 @@
-import { usePaginationStore } from '../stores/usePaginationStore';
+import { usePaginationStore } from '../store/usePaginationStore';
 
 export const Pagination = () => {
   const {

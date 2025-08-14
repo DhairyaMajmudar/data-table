@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { usePaginationStore } from '../stores/usePaginationStore';
+import { usePaginationStore } from '../store/usePaginationStore';
 import type { Product } from '../types/Product';
 import { Header } from './Header';
 import { Pagination } from './Pagination';
