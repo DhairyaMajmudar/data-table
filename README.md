@@ -7,6 +7,10 @@ A modern React data table implementation with multi-column sorting, filtering, a
 
 ## Demo
 
+[Screencast from 2025-08-14 12-43-11.webm](https://github.com/user-attachments/assets/81de311b-f2c4-43b9-b726-1c051c856e5d)
+
+
+
 ## Features
 
 - **Multi-column sorting**
