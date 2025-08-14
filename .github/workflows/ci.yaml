@@ -34,8 +34,8 @@ jobs:
       - name: Type checks
         run: bun type:check
 
-      # - name: Integration tests
-      #   run: bun test
+      - name: Integration tests
+        run: bun test
 
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
