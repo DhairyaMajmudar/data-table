@@ -7,8 +7,13 @@ interface HeaderProps {
 }
 
 export const Header = ({ products }: HeaderProps) => {
-  const { filterCategory, setFilterCategory, searchQuery, setSearchQuery } =
-    usePaginationStore();
+  const {
+    filterCategory,
+    setFilterCategory,
+    searchQuery,
+    setSearchQuery,
+    clearSorting,
+  } = usePaginationStore();
 
   const categories = extractUniqueCategories(products);
 
@@ -36,6 +41,16 @@ export const Header = ({ products }: HeaderProps) => {
             </option>
           ))}
         </select>
+      </div>
+
+      <div className="relative">
+        <button
+          type="reset"
+          onClick={clearSorting}
+          className="px-4 py-2 rounded bg-slate-700 text-white border border-slate-600 hover:bg-slate-600"
+        >
+          Clear Sorting
+        </button>
       </div>
     </div>
   );

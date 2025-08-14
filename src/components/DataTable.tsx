@@ -3,6 +3,7 @@ import { usePaginationStore } from '../stores/usePaginationStore';
 import type { Product } from '../types/Product';
 import { Header } from './Header';
 import { Pagination } from './Pagination';
+import { SortableHeader } from './SortableHeader';
 
 interface DataTableProps {
   products: Product[];
@@ -32,14 +33,12 @@ export default function DataTable({ products }: DataTableProps) {
           </colgroup>
           <thead className="bg-slate-700 text-left">
             <tr>
-              <th className="px-4 py-3 text-white cursor-pointer">
-                Product Name
-              </th>
-              <th className="px-4 py-3 text-white cursor-pointer">Brand</th>
-              <th className="px-4 py-3 text-white cursor-pointer">Category</th>
-              <th className="px-4 py-3 text-white cursor-pointer">Price</th>
-              <th className="px-4 py-3 text-white cursor-pointer">Rating</th>
-              <th className="px-4 py-3 text-white cursor-pointer">Stock</th>
+              <SortableHeader column="title" label="Product Name" />
+              <SortableHeader column="brand" label="Brand" />
+              <SortableHeader column="category" label="Category" />
+              <SortableHeader column="price" label="Price" />
+              <SortableHeader column="rating" label="Rating" />
+              <SortableHeader column="stock" label="Stock" />
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-700">

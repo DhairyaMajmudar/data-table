@@ -2,6 +2,13 @@ import { create } from 'zustand';
 import type { Product } from '../types/Product';
 import { filterProducts } from '../utils/tableUtils';
 
+type SortDirection = 'asc' | 'desc' | null;
+
+interface SortConfig {
+  column: keyof Product;
+  direction: SortDirection;
+}
+
 interface PaginationState {
   currentPage: number;
   setCurrentPage: (page: number) => void;
@@ -14,6 +21,10 @@ interface PaginationState {
 
   products: Product[];
   setProducts: (products: Product[]) => void;
+
+  sortConfigs: SortConfig[];
+  setSortColumn: (column: keyof Product) => void;
+  clearSorting: () => void;
 
   itemsPerPage: number;
 
@@ -41,6 +52,30 @@ export const usePaginationStore = create<PaginationState>((set, get) => ({
   products: [],
   setProducts: (products) => set({ products }),
 
+  sortConfigs: [],
+  setSortColumn: (column) =>
+    set((state) => {
+      const configIndex = state.sortConfigs.findIndex(
+        (config) => config.column === column,
+      );
+      const newSortConfigs = [...state.sortConfigs];
+
+      if (configIndex >= 0) {
+        const currentDirection = newSortConfigs[configIndex].direction;
+        if (currentDirection === 'asc') {
+          newSortConfigs[configIndex] = { column, direction: 'desc' };
+        } else if (currentDirection === 'desc') {
+          newSortConfigs.splice(configIndex, 1);
+        }
+      } else {
+        newSortConfigs.push({ column, direction: 'asc' });
+      }
+
+      return { sortConfigs: newSortConfigs };
+    }),
+
+  clearSorting: () => set({ sortConfigs: [] }),
+
   itemsPerPage: 10,
 
   nextPage: () => {
@@ -56,8 +91,38 @@ export const usePaginationStore = create<PaginationState>((set, get) => ({
   },
 
   getFilteredProducts: () => {
-    const { products, filterCategory, searchQuery } = get();
-    return filterProducts(products, filterCategory, searchQuery);
+    const { products, filterCategory, searchQuery, sortConfigs } = get();
+
+    let filteredProducts = filterProducts(
+      products,
+      filterCategory,
+      searchQuery,
+    );
+
+    if (sortConfigs.length > 0) {
+      filteredProducts = [...filteredProducts].sort((a, b) => {
+        for (const { column, direction } of sortConfigs) {
+          if (direction === null) continue;
+
+          const valueA = a[column];
+          const valueB = b[column];
+
+          if (typeof valueA === 'string' && typeof valueB === 'string') {
+            const comparison = valueA.localeCompare(valueB);
+            if (comparison !== 0) {
+              return direction === 'asc' ? comparison : -comparison;
+            }
+          } else if (typeof valueA === 'number' && typeof valueB === 'number') {
+            if (valueA !== valueB) {
+              return direction === 'asc' ? valueA - valueB : valueB - valueA;
+            }
+          }
+        }
+        return 0;
+      });
+    }
+
+    return filteredProducts;
   },
   getCurrentItems: () => {
     const { currentPage, itemsPerPage } = get();
