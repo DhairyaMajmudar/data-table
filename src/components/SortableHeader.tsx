@@ -1,5 +1,5 @@
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/16/solid';
-import { usePaginationStore } from '../stores/usePaginationStore';
+import { usePaginationStore } from '../store/usePaginationStore';
 import type { Product } from '../types/Product';
 
 interface SortableHeaderProps {

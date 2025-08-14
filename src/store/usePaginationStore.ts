@@ -38,6 +38,9 @@ interface PaginationState {
   getLastItemIndex: () => number;
 }
 
+/**
+ * Pagination state for managing the current page, filters, and sorting.
+ */
 export const usePaginationStore = create<PaginationState>((set, get) => ({
   currentPage: 1,
   setCurrentPage: (page) => set({ currentPage: page }),
